@@ -11,4 +11,4 @@ Class Name: Artificial Intelligence in Financial Trade
 ## Folder List
 - Meeting Note: 회의록 및 진행상황 보고 (.pptx or .pdf)
 - Research: 개인 자료조사 내용
-- Project: .py 프로젝트 모음
+- Project: 프로젝트 모음 (.py or .ipynb)
