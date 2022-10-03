@@ -10,6 +10,6 @@
 - 허지원
 
 ## Folder List
-- Meeting Note: 회의록 및 진행상황 보고 (.pptx or .pdf)
+- [Meeting Note](https://github.com/yeonju52/AIFT2022/tree/main/MeetingNote): 회의록 및 진행상황 보고 (.pptx or .pdf)
 - Research: 개인 자료조사 내용
-- Project: 프로젝트 모음 (.py or .ipynb)
+- [Project](https://github.com/yeonju52/AIFT2022/tree/main/Project): 프로젝트 모음 (.py or .ipynb)
