@@ -1,5 +1,6 @@
 # AIFT
 Class Name: Artificial Intelligence in Financial Trade
+Class Timetable: 2022 Fall, Wed 12pm~3pm
 
 교수님 github 주소: https://github.com/jangmino/AIFT2022.git
 
