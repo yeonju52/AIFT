@@ -1,7 +1,7 @@
 # AIFT
 Class Name: Artificial Intelligence in Financial Trade
 
-교수님 github: https://github.com/jangmino/AIFT2022.git
+교수님 github 주소: https://github.com/jangmino/AIFT2022.git
 
 ## 팀원 3명
 - 윤서영
