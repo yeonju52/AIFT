@@ -6,7 +6,7 @@
 ### Hours
   Wed 12pm~3pm
 ### Instructor
-  오장민 [github_link](https://github.com/jangmino/AIFT2022.git)
+  오장민 [Github Link](https://github.com/jangmino/AIFT2022.git)
 ### Teammates 3
   - 윤서영
   - 이연주
