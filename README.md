@@ -6,11 +6,11 @@
 ### Hours
   Wed 12pm~3pm
 ### Instructor
-  오장민 [Link](https://github.com/jangmino/AIFT2022.git)
+  [오장민](https://github.com/jangmino/AIFT2022.git)
 ### Teammates 3
-  - 윤서영 [Link](https://github.com/YoonSeoyeong)
-  - 이연주 [Link](https://github.com/yeonju52)
-  - 허지원 [Link](https://github.com/JiwonHeo01)
+  - [윤서영](https://github.com/YoonSeoyeong)
+  - [이연주](https://github.com/yeonju52)
+  - [허지원](https://github.com/JiwonHeo01)
 
 ## Folder List
 - [Meeting_Note](https://github.com/yeonju52/AIFT2022/tree/main/MeetingNote): 회의록 및 진행상황 보고 (.pptx or .pdf)
