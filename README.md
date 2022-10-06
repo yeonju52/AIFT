@@ -20,6 +20,6 @@ SSWU - Fall 2022
 
 
 ## Assignments
-- (1) 팀 프로젝트 현황 보고 (실시간 투자 환경 세팅)
+- (1) ~팀 프로젝트 현황 보고 (실시간 투자 환경 세팅)~
   - Deadline: ~2022.10.03 오후 11:59
   - Submission Path: [PDF](https://github.com/yeonju52/AIFT2022/blob/main/MeetingNote/%5BAIFT%5D%20221003_BranchFlow.pdf) or [PPT](https://github.com/yeonju52/AIFT2022/blob/main/MeetingNote/%5BAIFT%5D%20221003_BranchFlow.pptx)
