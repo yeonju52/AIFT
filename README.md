@@ -1,19 +1,19 @@
 # AIFT (SSWU - Fall 2022)
 
 ## COURSE INFO
-### FullName
+### Full Name
   Artificial Intelligence in Financial Trade
 ### Hours
   Wed 12pm~3pm
 ### Instructor
-  오장민 [github adress](https://github.com/jangmino/AIFT2022.git)
+  오장민 [github_link](https://github.com/jangmino/AIFT2022.git)
 ### Teammates 3
   - 윤서영
   - 이연주
   - 허지원
 
 ## Folder List
-- [Meeting Note](https://github.com/yeonju52/AIFT2022/tree/main/MeetingNote): 회의록 및 진행상황 보고 (.pptx or .pdf)
+- [Meeting_Note](https://github.com/yeonju52/AIFT2022/tree/main/MeetingNote): 회의록 및 진행상황 보고 (.pptx or .pdf)
 - Research: 개인 자료조사 내용
 - [Project](https://github.com/yeonju52/AIFT2022/tree/main/Project): 프로젝트 모음 (.py or .ipynb)
 
