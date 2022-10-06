@@ -1,4 +1,5 @@
-# AIFT [SSWU - Fall 2022]
+# AIFT
+SSWU - Fall 2022
 
 ## COURSE INFO
 ### Full Name
