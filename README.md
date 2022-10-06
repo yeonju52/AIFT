@@ -13,3 +13,9 @@
 - [Meeting Note](https://github.com/yeonju52/AIFT2022/tree/main/MeetingNote): 회의록 및 진행상황 보고 (.pptx or .pdf)
 - Research: 개인 자료조사 내용
 - [Project](https://github.com/yeonju52/AIFT2022/tree/main/Project): 프로젝트 모음 (.py or .ipynb)
+
+
+## Assignment
+1. 팀 프로젝트 현황 보고 (실시간 투자 환경 세팅)
+  - Deadline: ~ 2022.10.03 오후 11:59
+  - Path: https://github.com/yeonju52/AIFT2022/blob/main/MeetingNote/%5BAIFT%5D%20221003_BranchFlow.pdf
