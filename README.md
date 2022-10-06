@@ -1,10 +1,13 @@
 # AIFT (SSWU - Fall 2022)
 
 ## COURSE INFO
-- Name: Artificial Intelligence in Financial Trade
-- Hours: Wed 12pm~3pm
-- Instructor: 오장민 [github adress](https://github.com/jangmino/AIFT2022.git)
-- 팀원 3명
+### FullName
+  Artificial Intelligence in Financial Trade
+### Hours
+  Wed 12pm~3pm
+### Instructor
+  오장민 [github adress](https://github.com/jangmino/AIFT2022.git)
+### Teammates 3
   - 윤서영
   - 이연주
   - 허지원
