@@ -5,7 +5,7 @@
 ### Full Name
   Artificial Intelligence in Financial Trade
 ### Hours
-  Wed 12pm~3pm
+  Wed. 12pm~3pm
 ### Instructor
   [오장민](https://github.com/jangmino/AIFT2022.git) Prof.
 ### Teammates 3
