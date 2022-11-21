@@ -24,8 +24,9 @@
   - Deadline: ~2022.10.03 오후 11:59
   - Submission Path: [PDF](https://github.com/yeonju52/AIFT2022/blob/main/MeetingNote/%5BAIFT%5D%20221003_BranchFlow.pdf) or [PPT](https://github.com/yeonju52/AIFT2022/blob/main/MeetingNote/%5BAIFT%5D%20221003_BranchFlow.pptx)
   
-- [2] 프로젝트 진행 상황 공유: (팀당 4분 발표 준비)
+- (2) ~프로젝트 진행 상황 공유: (팀당 4분 발표 준비)~
   - Deadline: ~2022.11.15 오전 11:59
+  - Submission Path: [PDF](https://github.com/yeonju52/AIFT2022/blob/main/MeetingNote/%5BAIFT%5D%20221115_envSetting.pdf) or [PPT](https://github.com/yeonju52/AIFT2022/blob/main/MeetingNote/%5BAIFT%5D%20221115_envSetting.pptx)
 
 ## Meeting (* 이전에 했던 미팅들 기록 필요)
 - 정기 오프라인 회의: 매주 목요일 6시~ (최대 11시)
