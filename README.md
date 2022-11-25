@@ -8,7 +8,7 @@
   Wed. 12pm~3pm
 ### Instructor
   [오장민](https://github.com/jangmino/AIFT2022.git) Prof.
-### 크리스탈 012 Teammates 3
+### 크리스탈 012 (Teammates 3)
   - [윤서영](https://github.com/YoonSeoyeong)
   - [이연주](https://github.com/yeonju52)
   - [허지원](https://github.com/JiwonHeo01)
