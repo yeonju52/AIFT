@@ -1,7 +1,14 @@
 import pandas as pd
+# from tqdm.auto import tqdm
 import time
 
-TR_REQ_TIME_INTERVAL = 0.2 # TODO: 가능하면 시간을 줄여보자
+TR_REQ_TIME_INTERVAL = 3.4 # TODO: 가능하면 시간을 줄여보자 (0.2)
+'''
+횟수 제한 안내
+https://kminito.tistory.com/35
+
+3.6초 간격 : 1시간에 1,000회 -> 정상 작동
+'''
 
 # opt10081 TR 요청
 def TR_day(kiwoom, item_code, yyyymmdd): # TODO: 포인터로 받아야 하나?
@@ -31,9 +38,9 @@ def TR_day(kiwoom, item_code, yyyymmdd): # TODO: 포인터로 받아야 하나?
     3. 수정주가구분 = 0 or 1, 수신데이터 1:유상증자, 2:무상증자, 4:배당락, 8:액면분할, 16:액면병합, 32:기업합병, 64:감자, 256:권리락
 
 '''
-def TR_min(kiwoom, item_code, yyyymmddhhmmss, tick):
+def TR_min(kiwoom, item_code, tick):
     kiwoom.ohlcv = {'date': [], 'open': [], 'high': [], 'low': [], 'close': [], 'volume': []}
-
+    
     # opt10080 TR 요청 (한번에  900개)
     kiwoom.set_input_value("종목코드", item_code)
     kiwoom.set_input_value("틱범위", tick)
@@ -41,6 +48,10 @@ def TR_min(kiwoom, item_code, yyyymmddhhmmss, tick):
     kiwoom.comm_rq_data("opt10080_req", "opt10080", 0, "0001")
 
     while kiwoom.remained_data == True:
+        # 조건문 추가 (통신량 적게)
+        if kiwoom.ohlcv['date'][-1] <=  kiwoom.yyyymmddhhmmss:
+            break
+        
         time.sleep(TR_REQ_TIME_INTERVAL)
         kiwoom.set_input_value("종목코드", item_code)
         kiwoom.set_input_value("틱범위", tick)

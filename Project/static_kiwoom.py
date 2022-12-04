@@ -5,6 +5,9 @@ import time
 
 TR_REQ_TIME_INTERVAL = 0.2
 
+"""
+참고:    https://wikidocs.net/5757
+"""
 class Kiwoom(QAxWidget):
     def __init__(self):
         super().__init__()
@@ -44,8 +47,6 @@ class Kiwoom(QAxWidget):
 
     def set_input_value(self, id, value): # 수정
         self.dynamicCall("SetInputValue(QString, QString)", id, value)
-        # for key, val in input_dict.items():
-        #     self.dynamicCall("SetInputValue(QString, QString)", key, val)
 
     def comm_rq_data(self, rqname, trcode, next, screen_no):
         self.dynamicCall("CommRqData(QString, QString, int, QString", rqname, trcode, next, screen_no)
@@ -75,10 +76,10 @@ class Kiwoom(QAxWidget):
             self.remained_data = False
 
         # Method 호출
-        if rqname == "opt10081_req":
-            self._opt10081(rqname, trcode)
-        elif rqname == "opt10080_req":
+        if rqname == "opt10080_req":
             self._opt10080(rqname, trcode)
+        elif rqname == "opt10081_req":
+            self._opt10081(rqname, trcode)
         
         # 이벤트 루프에 대한 처리
         try:
@@ -117,11 +118,15 @@ class Kiwoom(QAxWidget):
             close = self._comm_get_data(trcode, "", rqname, i, "현재가")
             volume = self._comm_get_data(trcode, "", rqname, i, "거래량")
             
+            # 조건문 추가 (중복)
+            if(date <= self.yyyymmddhhmmss):
+                break
+
             self.ohlcv['date'].append(date)
-            self.ohlcv['open'].append(int(open))
-            self.ohlcv['high'].append(int(high))
-            self.ohlcv['low'].append(int(low))
-            self.ohlcv['close'].append(int(close))
+            self.ohlcv['open'].append(abs(int(open)))
+            self.ohlcv['high'].append(abs(int(high)))
+            self.ohlcv['low'].append(abs(int(low)))
+            self.ohlcv['close'].append(abs(int(close)))
             self.ohlcv['volume'].append(int(volume))
 
 
