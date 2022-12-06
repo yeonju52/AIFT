@@ -2,7 +2,7 @@ import pandas as pd
 # from tqdm.auto import tqdm
 import time
 
-TR_REQ_TIME_INTERVAL = 3.4 # TODO: 가능하면 시간을 줄여보자 (0.2)
+TR_REQ_TIME_INTERVAL = 1.2 # TODO: 가능하면 시간을 줄여보자 (0.2)
 '''
 횟수 제한 안내
 https://kminito.tistory.com/35
@@ -58,4 +58,5 @@ def TR_min(kiwoom, item_code, tick):
         kiwoom.set_input_value("수정주가구분", 1)
         kiwoom.comm_rq_data("opt10080_req", "opt10080", 2, "0001")
 
-    return pd.DataFrame(kiwoom.ohlcv, columns=['open', 'high', 'low', 'close', 'volume'], index=kiwoom.ohlcv['date'])
+    return pd.DataFrame(kiwoom.ohlcv, columns=['date', 'open', 'high', 'low', 'close', 'volume'])
+    # return pd.DataFrame(kiwoom.ohlcv, columns=['open', 'high', 'low', 'close', 'volume'], index=kiwoom.ohlcv['date'])

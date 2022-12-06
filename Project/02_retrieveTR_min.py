@@ -3,6 +3,7 @@ from static_kiwoom import *
 from tool import retrieveTR
 from tool import manageDB
 import pandas as pd
+from datetime import datetime
 
 # 주식 코드번호 가져오기 (.py로 보여주기)
 # dictionary 순서 기억함
@@ -35,12 +36,12 @@ if __name__ == "__main__":
     조회 데이터 저장 (아직 미완)
     """
 
+    # lowerBound
+    kiwoom.yyyymmddhhmmss = '20221118069500'
+    # upperBound
+    kiwoom.yesterday = datetime.today().strftime('%Y%m%d') + '000000' # 오늘 00시 00분 전까지
+
     for i in range(len(st_code)):
         kiwoom.yyyymmddhhmmss = last_update[i]
         df = retrieveTR.TR_min(kiwoom, st_code[i], 1)
-        print(df, '\n')
-
-    
-
-
-    
+        print(df, '\n')    

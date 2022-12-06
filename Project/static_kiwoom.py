@@ -118,10 +118,13 @@ class Kiwoom(QAxWidget):
             close = self._comm_get_data(trcode, "", rqname, i, "현재가")
             volume = self._comm_get_data(trcode, "", rqname, i, "거래량")
             
-            # 조건문 추가 (중복)
+            # 조건문 추가 (데이터 중복)
+            # lowerBound
             if(date <= self.yyyymmddhhmmss):
                 break
-
+            # upperBound
+            if(date >= self.yesterday):
+                continue
             self.ohlcv['date'].append(date)
             self.ohlcv['open'].append(abs(int(open)))
             self.ohlcv['high'].append(abs(int(high)))
