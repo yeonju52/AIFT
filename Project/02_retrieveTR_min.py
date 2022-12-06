@@ -1,15 +1,23 @@
 import sys
 from static_kiwoom import *
 from tool import retrieveTR
+from tool import manageDB
 import pandas as pd
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
+
+# 주식 코드번호 가져오기 (.py로 보여주기)
+# dictionary 순서 기억함
+# { # company_info의 PRIMARY KEY 이자, query의 TABLE NAME
+#     '069500',   # : 'kodex_200',
+#     '114800',   # : 'kodex_inverse',
+#     '226490'    # : 'kodex_kospi'    
+# }
+
+st_code = ['069500', '114800', '226490']
+nm_code = ['kodex_200', 'kodex_inverse', 'kodex_kospi']
 
 if __name__ == "__main__":
-
     app = QApplication(sys.argv)
     kiwoom = Kiwoom()
-
     kiwoom.comm_connect()
     
     """ 
@@ -17,22 +25,20 @@ if __name__ == "__main__":
     조회 정보 가져오기 (DB에서)
     어떤 코드..? 날짜 어느 시점부터부터..?
     """
-    # 주식 코드번호 가져오기
-    item_code = "069500"
-
-    # 날짜 정하기 (DB 존재 여부에 따라)
-    # Opt1. (DB 생성 X): 해당 코드를 처음 접속한 것
-    before_1_year = (datetime.today() - relativedelta(years=1)).strftime('%Y%m%d') + '000000'   # now = datetime.now().strftime('%Y%m%d%H%M%S')
-    # Opt2. (DB 생성 O): 해당 코드에 접속한 적 있음. DB-update date를 받아옴 
-    kiwoom.yyyymmddhhmmss = "20220518153000"
+    # 1. 조회 정보 가져오기 (DB 저장, 이전 조회 정보) : 해당 코드에 정보 없으면 1년전 00시 00분 반환
+    sql_company_info = manageDB.sqlReader()
+    last_update = sql_company_info.get_last_update(st_code)
 
     """
     2.
     조회 시작
     조회 데이터 저장 (아직 미완)
     """
-    df = retrieveTR.TR_min(kiwoom, item_code, 1)
-    print(df)
+
+    for i in range(len(st_code)):
+        kiwoom.yyyymmddhhmmss = last_update[i]
+        df = retrieveTR.TR_min(kiwoom, st_code[i], 1)
+        print(df, '\n')
 
     
 

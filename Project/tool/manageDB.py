@@ -63,7 +63,7 @@ class setQuery:
     self.con.commit()
 
     exercise2) Delete
-    self.curs.execute("DELETE FROM company_info st_code = 069500")
+    self.curs.execute("DELETE FROM company_info st_code = "226490")
     self.con.commit()
     '''
 
