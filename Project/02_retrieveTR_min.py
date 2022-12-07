@@ -14,7 +14,7 @@ from datetime import datetime
 # }
 
 st_code = ['069500', '114800', '226490']
-nm_code = ['kodex_200', 'kodex_inverse', 'kodex_kospi']
+nm_code = []    # ['kodex_200', 'kodex_inverse', 'kodex_kospi']
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -26,7 +26,13 @@ if __name__ == "__main__":
     조회 정보 가져오기 (DB에서)
     어떤 코드..? 날짜 어느 시점부터부터..?
     """
-    # 1. 조회 정보 가져오기 (DB 저장, 이전 조회 정보) : 해당 코드에 정보 없으면 1년전 00시 00분 반환
+    # 1. 조회 정보 가져오기 (정보 코드와 정보 코드명)
+    for i in st_code:
+        nm_code.append(kiwoom.get_master_code_name(i))
+    print(nm_code)
+
+'''
+    # 2. 조회 정보 가져오기 (DB 저장, 이전 조회 정보) : 해당 코드에 정보 없으면 1년전 00시 00분 반환
     sql_company_info = manageDB.sqlReader()
     last_update = sql_company_info.get_last_update(st_code)
 
@@ -45,3 +51,4 @@ if __name__ == "__main__":
         kiwoom.yyyymmddhhmmss = last_update[i]
         df = retrieveTR.TR_min(kiwoom, st_code[i], 1)
         print(df, '\n')    
+'''
