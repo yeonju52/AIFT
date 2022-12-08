@@ -43,12 +43,11 @@ if __name__ == "__main__":
         if last_update[i] > kiwoom.upperBound:
             continue
         kiwoom.lowerBound = last_update[i]
-
-        dt_start = datetime.now().strftime('%Y%m%d%H%M%S')
+        print(st_code[i])
         df = retrieveTR.TR_min(kiwoom, st_code[i], 1)
         # sql로 저장
         sql.set_query(st_code[i], df)
         # 조회 정보 가져오기 (정보 코드와 정보 코드명), last_update를 업데이트
-        sql.update_comany_info([st_code[i], kiwoom.get_master_code_name(st_code[i]), dt_start])
+        sql.update_comany_info([st_code[i], kiwoom.get_master_code_name(st_code[i]), df['date'][0]])
         
     
