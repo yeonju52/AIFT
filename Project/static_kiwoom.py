@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QAxContainer import *
 from PyQt5.QtCore import *
 import time
+from tqdm.auto import tqdm
 
 TR_REQ_TIME_INTERVAL = 0.2
 
@@ -110,7 +111,7 @@ class Kiwoom(QAxWidget):
     def  _opt10080(self, rqname, trcode):
         data_cnt = self._get_repeat_cnt(trcode, rqname)
 
-        for i in range(data_cnt):
+        for i in tqdm(range(data_cnt)):
             date = self._comm_get_data(trcode, "", rqname, i, "체결시간")
             open = self._comm_get_data(trcode, "", rqname, i, "시가")
             high = self._comm_get_data(trcode, "", rqname, i, "고가")
@@ -120,10 +121,10 @@ class Kiwoom(QAxWidget):
             
             # 조건문 추가 (데이터 중복)
             # lowerBound
-            if(date <= self.yyyymmddhhmmss):
+            if(date <= self.lowerBound):
                 break
             # upperBound
-            if(date >= self.yesterday):
+            if(date >= self.upperBound):
                 continue
             self.ohlcv['date'].append(date)
             self.ohlcv['open'].append(abs(int(open)))

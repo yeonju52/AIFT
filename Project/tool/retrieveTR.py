@@ -2,7 +2,7 @@ import pandas as pd
 # from tqdm.auto import tqdm
 import time
 
-TR_REQ_TIME_INTERVAL = 1.2 # TODO: 가능하면 시간을 줄여보자 (0.2)
+TR_REQ_TIME_INTERVAL = 1.0 # TODO: 가능하면 시간을 줄여보자 (0.2)
 '''
 횟수 제한 안내
 https://kminito.tistory.com/35
@@ -49,7 +49,7 @@ def TR_min(kiwoom, item_code, tick):
 
     while kiwoom.remained_data == True:
         # 조건문 추가 (통신량 적게)
-        if kiwoom.ohlcv['date'][-1] <=  kiwoom.yyyymmddhhmmss:
+        if kiwoom.ohlcv['date'][-1] <=  kiwoom.lowerBound:
             break
         
         time.sleep(TR_REQ_TIME_INTERVAL)
