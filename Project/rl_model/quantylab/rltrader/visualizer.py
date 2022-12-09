@@ -74,7 +74,7 @@ class Visualizer:
                     # 배경 색으로 행동 표시
                     self.axes[1].axvline(i, color=color, alpha=0.1)
             self.axes[1].plot(self.x, num_stocks, '-k')  # 보유 주식 수 그리기
-
+            '''
             # 차트 3. 가치 신경망
             if len(outvals_value) > 0:
                 max_actions = np.argmax(outvals_value, axis=1)
@@ -110,7 +110,7 @@ class Visualizer:
                     self.axes[3].plot(
                         self.x, outvals_policy[:, action], 
                         color=color, linestyle='-')
-
+            '''
             # 차트 5. 포트폴리오 가치
             self.axes[4].axhline(
                 initial_balance, linestyle='-', color='gray')

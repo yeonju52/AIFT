@@ -11,7 +11,7 @@ FORMAT_DATETIME = "%Y%m%d%H%M%S"
 def get_today_str():
     today = datetime.datetime.combine(
         datetime.date.today(), datetime.datetime.min.time())
-    today_str = today.strftime('%Y%m%d')
+    today_str = today.strftime('%Y%m%d') #  + '000000'
     return today_str
 
 

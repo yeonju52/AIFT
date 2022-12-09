@@ -12,14 +12,14 @@ from quantylab.rltrader import data_manager
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', choices=['train', 'test', 'update', 'predict'], default='train')
-    parser.add_argument('--ver', choices=['v1', 'v2', 'v3', 'v4'], default='v2')
-    parser.add_argument('--name', default=utils.get_time_str())
-    parser.add_argument('--stock_code', nargs='+')
-    parser.add_argument('--rl_method', choices=['dqn', 'pg', 'ac', 'a2c', 'a3c', 'monkey'])
-    parser.add_argument('--net', choices=['dnn', 'lstm', 'cnn', 'monkey'], default='dnn')
-    parser.add_argument('--backend', choices=['pytorch', 'tensorflow', 'plaidml'], default='pytorch')
-    parser.add_argument('--start_date', default='20200101')
-    parser.add_argument('--end_date', default='20201231')
+    parser.add_argument('--ver', choices=['v1', 'v2'], default='v1')
+    parser.add_argument('--name', default='226490') # 069500 변경
+    parser.add_argument('--stock_code', nargs='+', default='226490')
+    parser.add_argument('--rl_method', choices=['dqn', 'pg'], default='pg')
+    parser.add_argument('--net', choices=['dnn', 'lstm', 'cnn'], default='cnn')
+    parser.add_argument('--backend', choices=['pytorch', 'tensorflow'], default='pytorch')
+    parser.add_argument('--start_date', default='20220606090000')   # 20211206090000
+    parser.add_argument('--end_date', default='20221206103700') # 20221206103700
     parser.add_argument('--lr', type=float, default=0.0001)
     parser.add_argument('--discount_factor', type=float, default=0.7)
     parser.add_argument('--balance', type=int, default=100000000)
@@ -39,9 +39,10 @@ if __name__ == '__main__':
     os.environ['RLTRADER_BACKEND'] = args.backend
     if args.backend == 'tensorflow':
         os.environ['KERAS_BACKEND'] = 'tensorflow'
-    elif args.backend == 'plaidml':
-        os.environ['KERAS_BACKEND'] = 'plaidml.keras.backend'
 
+    
+    print(settings.BASE_DIR)
+    
     # 출력 경로 생성
     output_path = os.path.join(settings.BASE_DIR, 'output', output_name)
     if not os.path.isdir(output_path):
@@ -74,8 +75,7 @@ if __name__ == '__main__':
     logger.info(params)
     
     # Backend 설정, 로그 설정을 먼저하고 RLTrader 모듈들을 이후에 임포트해야 함
-    from quantylab.rltrader.learners import ReinforcementLearner, DQNLearner, \
-        PolicyGradientLearner, ActorCriticLearner, A2CLearner, A3CLearner
+    from quantylab.rltrader.learners import ReinforcementLearner, DQNLearner, PolicyGradientLearner
 
     common_params = {}
     list_stock_code = []
@@ -84,7 +84,7 @@ if __name__ == '__main__':
     list_min_trading_price = []
     list_max_trading_price = []
 
-    for stock_code in args.stock_code:
+    for stock_code in ['226490']: # args.stock_code:
         # 차트 데이터, 학습 데이터 준비
         chart_data, training_data = data_manager.load_data(
             stock_code, args.start_date, args.end_date, ver=args.ver)
@@ -104,51 +104,18 @@ if __name__ == '__main__':
 
         # 강화학습 시작
         learner = None
-        if args.rl_method != 'a3c':
-            common_params.update({'stock_code': stock_code,
-                'chart_data': chart_data, 
-                'training_data': training_data,
-                'min_trading_price': min_trading_price, 
-                'max_trading_price': max_trading_price})
-            if args.rl_method == 'dqn':
-                learner = DQNLearner(**{**common_params, 
-                    'value_network_path': value_network_path})
-            elif args.rl_method == 'pg':
-                learner = PolicyGradientLearner(**{**common_params, 
-                    'policy_network_path': policy_network_path})
-            elif args.rl_method == 'ac':
-                learner = ActorCriticLearner(**{**common_params, 
-                    'value_network_path': value_network_path, 
-                    'policy_network_path': policy_network_path})
-            elif args.rl_method == 'a2c':
-                learner = A2CLearner(**{**common_params, 
-                    'value_network_path': value_network_path, 
-                    'policy_network_path': policy_network_path})
-            elif args.rl_method == 'monkey':
-                common_params['net'] = args.rl_method
-                common_params['num_epoches'] = 10
-                common_params['start_epsilon'] = 1
-                learning = False
-                learner = ReinforcementLearner(**common_params)
-        else:
-            list_stock_code.append(stock_code)
-            list_chart_data.append(chart_data)
-            list_training_data.append(training_data)
-            list_min_trading_price.append(min_trading_price)
-            list_max_trading_price.append(max_trading_price)
+        common_params.update({'stock_code': stock_code,
+            'chart_data': chart_data, 
+            'training_data': training_data,
+            'min_trading_price': min_trading_price, 
+            'max_trading_price': max_trading_price})
+        if args.rl_method == 'dqn':
+            learner = DQNLearner(**{**common_params, 
+                'value_network_path': value_network_path})
+        elif args.rl_method == 'pg':
+            learner = PolicyGradientLearner(**{**common_params, 
+                'policy_network_path': policy_network_path})
 
-    if args.rl_method == 'a3c':
-        learner = A3CLearner(**{
-            **common_params, 
-            'list_stock_code': list_stock_code, 
-            'list_chart_data': list_chart_data, 
-            'list_training_data': list_training_data,
-            'list_min_trading_price': list_min_trading_price, 
-            'list_max_trading_price': list_max_trading_price,
-            'value_network_path': value_network_path, 
-            'policy_network_path': policy_network_path})
-    
-    assert learner is not None
 
     if args.mode in ['train', 'test', 'update']:
         learner.run(learning=learning)
