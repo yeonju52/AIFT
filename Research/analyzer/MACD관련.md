@@ -23,7 +23,10 @@ https://iamaman.tistory.com/3289 -> 아예 앱으로 만들어..?\
 https://lazyduo.github.io/pyinstaller
 https://docs.python.org/ko/3.8/distutils/builtdist.html
 
+--system-site-packages
 **https://www.youtube.com/watch?v=o_vKT80BBkw**
+https://ddanggle.gitbooks.io/interpy-kr/content/ch11-Virtual-Environment.html
+
 
 원하는 시간마다 https://wikidocs.net/137924
 
