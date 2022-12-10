@@ -48,10 +48,9 @@ def TR_min(kiwoom, item_code, tick):
     kiwoom.comm_rq_data("opt10080_req", "opt10080", 0, "0001")
 
     while kiwoom.remained_data == True:
-        # 조건문 추가 (통신량 적게)
-        if kiwoom.ohlcv['date'][-1] <=  kiwoom.lowerBound:
-            break
-        
+        # # 조건문 추가 (통신량 적게)
+        # if kiwoom.ohlcv['date'][-1] <=  kiwoom.lowerBound:
+        #     break
         time.sleep(TR_REQ_TIME_INTERVAL)
         kiwoom.set_input_value("종목코드", item_code)
         kiwoom.set_input_value("틱범위", tick)
