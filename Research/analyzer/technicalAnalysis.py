@@ -3,7 +3,7 @@ import datetime
 import matplotlib.pyplot as plt
 
 # Get SS Data from Yahoo
-ss = web.DataReader("005930.KS", "yahoo", "2020-01-01", "2022-12-01")
+ss = web.DataReader("005930.KS", "yahoo", "202001.-01-01", "2022-12-01")
 new_ss = ss[ss['Volume'] !=0]
 
 # Moving average
