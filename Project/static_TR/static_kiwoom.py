@@ -110,7 +110,7 @@ class Kiwoom(QAxWidget):
     # 분봉 데이터 얻기
     def  _opt10080(self, rqname, trcode):
         data_cnt = self._get_repeat_cnt(trcode, rqname)
-
+        
         for i in tqdm(range(data_cnt)):
             date = self._comm_get_data(trcode, "", rqname, i, "체결시간")
             open = self._comm_get_data(trcode, "", rqname, i, "시가")
@@ -120,18 +120,20 @@ class Kiwoom(QAxWidget):
             volume = self._comm_get_data(trcode, "", rqname, i, "거래량")
             
             # 조건문 추가 (데이터 중복)
+
+            # upperBound
+            if(date > self.upperBound):
+                continue
             # lowerBound
             if(date <= self.lowerBound):
-                break
-            # upperBound
-            if(date >= self.upperBound):
-                continue
+                break 
             self.ohlcv['date'].append(date)
             self.ohlcv['open'].append(abs(int(open)))
             self.ohlcv['high'].append(abs(int(high)))
             self.ohlcv['low'].append(abs(int(low)))
             self.ohlcv['close'].append(abs(int(close)))
             self.ohlcv['volume'].append(int(volume))
+            
 
 
 
