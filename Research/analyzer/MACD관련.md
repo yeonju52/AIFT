@@ -23,6 +23,8 @@ https://iamaman.tistory.com/3289 -> 아예 앱으로 만들어..?\
 https://lazyduo.github.io/pyinstaller
 https://docs.python.org/ko/3.8/distutils/builtdist.html
 
+**https://www.youtube.com/watch?v=o_vKT80BBkw**
+
 원하는 시간마다 https://wikidocs.net/137924
 
 보내기..?https://wikidocs.net/155715
