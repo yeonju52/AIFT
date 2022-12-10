@@ -1,5 +1,4 @@
 import pandas as pd
-# from tqdm.auto import tqdm
 import time
 
 TR_REQ_TIME_INTERVAL = 1.0 # TODO: 가능하면 시간을 줄여보자 (0.2)
@@ -58,4 +57,3 @@ def TR_min(kiwoom, item_code, tick):
         kiwoom.comm_rq_data("opt10080_req", "opt10080", 2, "0001")
 
     return pd.DataFrame(kiwoom.ohlcv, columns=['date', 'open', 'high', 'low', 'close', 'volume'])
-    # return pd.DataFrame(kiwoom.ohlcv, columns=['open', 'high', 'low', 'close', 'volume'], index=kiwoom.ohlcv['date'])
