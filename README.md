@@ -28,6 +28,10 @@
   - Deadline: ~2022.11.15 오전 11:59
   - Submission Path: [PDF](https://github.com/yeonju52/AIFT2022/blob/main/Assignments/%5BAIFT%5D%20221115_envSetting.pdf) or [PPT](https://github.com/yeonju52/AIFT2022/blob/main/Assignments/%5BAIFT%5D%20221115_envSetting.pptx)
 
+- (3) 팀프로젝트 결과물 제출
+-   Deadline: ~2022.12.13 오전 11:59
+-   Submission Path: 미완
+
 ## Meeting (* 이전에 했던 미팅들 기록 필요)
 - 정기 오프라인 회의: 매주 목요일 6시~ (최대 11시)
 - 온라인 회의 with Zoom
