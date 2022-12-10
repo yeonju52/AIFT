@@ -4,6 +4,7 @@ import numpy as np
 import sqlite3
 
 from quantylab.rltrader import settings
+from quantylab.rltrader import manageDB
 
 
 COLUMNS_CHART_DATA = ['date', 'open', 'high', 'low', 'close', 'volume']
@@ -87,10 +88,8 @@ table_select_query = """
     """
 
 def load_data(code, date_from, date_to, ver='v2'):
-    header = None if ver == 'v1' else 0
-    df = pd.read_csv('C:/Users/SHLEE/Documents/GitHub/Crystal012/Project/rl_model/data/v1/226490.csv', \
-        dtype={'open':float,'high':float,'low':float, 'close':float,'volume':float}, \
-            converters={'date': lambda x: str(x)})
+    sql = manageDB.sqlReader()
+    df = sql.read_query('069500')
 
     if ver == 'v1':
         df.columns = ['date', 'open', 'high', 'low', 'close', 'volume']
@@ -105,11 +104,11 @@ def load_data(code, date_from, date_to, ver='v2'):
     df['date'] = df['date'].str.replace('-', '')
     df = df[(df['date'] >= date_from) & (df['date'] <= date_to)]
     df = df.fillna(method='ffill').reset_index(drop=True)
-    print(df)
+    # print(df)
 
     # 차트 데이터 분리
     chart_data = df[COLUMNS_CHART_DATA]
-    print(chart_data)
+    # print(chart_data)
     # 학습 데이터 분리
     training_data = None
     if ver == 'v1':

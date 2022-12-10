@@ -13,13 +13,13 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', choices=['train', 'test', 'update', 'predict'], default='train')
     parser.add_argument('--ver', choices=['v1', 'v2'], default='v1')
-    parser.add_argument('--name', default='226490') # 069500 변경
-    parser.add_argument('--stock_code', nargs='+', default='226490')
+    parser.add_argument('--name', default='069500') # 069500 변경
+    parser.add_argument('--stock_code', nargs='+', default='069500')
     parser.add_argument('--rl_method', choices=['dqn', 'pg'], default='pg')
-    parser.add_argument('--net', choices=['dnn', 'lstm', 'cnn'], default='cnn')
+    parser.add_argument('--net', choices=['dnn', 'lstm', 'cnn'], default='lstm')
     parser.add_argument('--backend', choices=['pytorch', 'tensorflow'], default='pytorch')
-    parser.add_argument('--start_date', default='20220606090000')   # 20211206090000
-    parser.add_argument('--end_date', default='20221206103700') # 20221206103700
+    parser.add_argument('--start_date', default='20220101090000')   # 20220606090000
+    parser.add_argument('--end_date', default='20221801000000') # 20221206103700
     parser.add_argument('--lr', type=float, default=0.0001)
     parser.add_argument('--discount_factor', type=float, default=0.7)
     parser.add_argument('--balance', type=int, default=100000000)
@@ -32,14 +32,13 @@ if __name__ == '__main__':
     value_network_name = f'{args.name}_{args.rl_method}_{args.net}_value.mdl'
     policy_network_name = f'{args.name}_{args.rl_method}_{args.net}_policy.mdl'
     start_epsilon = 1 if args.mode in ['train', 'update'] else 0
-    num_epoches = 100 if args.mode in ['train', 'update'] else 1
+    num_epoches = 1000 if args.mode in ['train', 'update'] else 1
     num_steps = 5 if args.net in ['lstm', 'cnn'] else 1
 
     # Backend 설정
     os.environ['RLTRADER_BACKEND'] = args.backend
-    if args.backend == 'tensorflow':
-        os.environ['KERAS_BACKEND'] = 'tensorflow'
-
+    # if args.backend == 'tensorflow':
+    #     os.environ['KERAS_BACKEND'] = 'tensorflow'
     
     print(settings.BASE_DIR)
     
@@ -84,7 +83,7 @@ if __name__ == '__main__':
     list_min_trading_price = []
     list_max_trading_price = []
 
-    for stock_code in ['226490']: # args.stock_code:
+    for stock_code in ['069500']: # args.stock_code:
         # 차트 데이터, 학습 데이터 준비
         chart_data, training_data = data_manager.load_data(
             stock_code, args.start_date, args.end_date, ver=args.ver)
