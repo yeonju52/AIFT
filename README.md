@@ -18,6 +18,10 @@
 - [Research](https://github.com/yeonju52/AIFT2022/tree/main/Research): 개인 자료조사 내용
 - [Project](https://github.com/yeonju52/AIFT2022/tree/main/Project): 프로젝트 모음 (.py or .ipynb)
 
+## Meeting (* 이전에 했던 미팅들 기록 필요)
+- 정기 오프라인 회의: 매주 목요일 6시~ (최대 11시)
+- 온라인 회의 with Zoom
+- 노션 관리 및 주 작성 : 윤서영
 
 ## Assignments
 - (1) ~팀 프로젝트 현황 보고 (실시간 투자 환경 세팅)~
@@ -31,8 +35,3 @@
 - (3) 팀프로젝트 결과물 제출
 -   Deadline: ~2022.12.13 오전 11:59
 -   Submission Path: 미완
-
-## Meeting (* 이전에 했던 미팅들 기록 필요)
-- 정기 오프라인 회의: 매주 목요일 6시~ (최대 11시)
-- 온라인 회의 with Zoom
-- 노션 관리 및 주 작성 : 윤서영
