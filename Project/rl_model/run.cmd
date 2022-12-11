@@ -10,16 +10,16 @@ call C:\Users\USER\Anaconda3\Scripts\activate.bat
 for %%c in (069500 114800 226490) do (
     for %%n in (dnn lstm cnn) do (
         @REM train
-        python main.py --mode train --ver v1 --name %%c --stock_code %%c --rl_method dqn --net %%n --start_date 20211206090000 --end_date 20220806000000
+        python main.py --mode train --ver v1 --name %%c --stock_code %%c --rl_method pg --net %%n --start_date 20211206090000 --end_date 20220806000000
 
         @REM test
-        python main.py --mode test --ver v1 --name %%c --stock_code %%c --rl_method dqn --net %%n --start_date 20220806090000 --end_date 20221106000000
+        python main.py --mode test --ver v1 --name %%c --stock_code %%c --rl_method pg --net %%n --start_date 20220806090000 --end_date 20221106000000
 
         @REM predict
-        python main.py --mode predict --ver v1 --name %%c --stock_code %%c --rl_method dqn --net %%n --start_date 2022110609000 --end_date 20221207153500
+        python main.py --mode predict --ver v1 --name %%c --stock_code %%c --rl_method pg --net %%n --start_date 2022110609000 --end_date 20221207153500
 
         @REM update
-        python main.py --mode update --ver v1 --name %%c --stock_code %%c --rl_method dqn --net %%n --start_date 20220806090000 --end_date 20221106000000
+        python main.py --mode update --ver v1 --name %%c --stock_code %%c --rl_method pg --net %%n --start_date 20220806090000 --end_date 20221106000000
     )
 )
 

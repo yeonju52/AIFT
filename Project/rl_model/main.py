@@ -4,17 +4,17 @@ import logging
 import argparse
 import json
 
-from quantylab.rltrader import settings
-from quantylab.rltrader import utils
-from quantylab.rltrader import data_manager
+from rltrader import settings
+from rltrader import utils
+from rltrader import data_manager
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', choices=['train', 'test', 'update', 'predict'], default='train')
     parser.add_argument('--ver', choices=['v1', 'v2'], default='v1')
-    parser.add_argument('--name', default='069500') # 069500 변경
-    parser.add_argument('--stock_code', nargs='+', default='069500')
+    parser.add_argument('--name', choices=['069500', '114800', '226490'], default='069500') # 069500 변경
+    parser.add_argument('--stock_code', choices=['069500', '114800', '226490'], nargs='+', default='069500')
     parser.add_argument('--rl_method', choices=['dqn', 'pg'], default='pg')
     parser.add_argument('--net', choices=['dnn', 'lstm', 'cnn'], default='lstm')
     parser.add_argument('--backend', choices=['pytorch', 'tensorflow'], default='pytorch')
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     logger.info(params)
     
     # Backend 설정, 로그 설정을 먼저하고 RLTrader 모듈들을 이후에 임포트해야 함
-    from quantylab.rltrader.learners import ReinforcementLearner, DQNLearner, PolicyGradientLearner
+    from rltrader.learners import ReinforcementLearner, DQNLearner, PolicyGradientLearner
 
     common_params = {}
     list_stock_code = []

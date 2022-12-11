@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 import sqlite3
 
-from quantylab.rltrader import settings
-from quantylab.rltrader import manageDB
+from rltrader import settings
+from rltrader import manageDB
 
 
 COLUMNS_CHART_DATA = ['date', 'open', 'high', 'low', 'close', 'volume']
