@@ -6,7 +6,6 @@ import sqlite3
 from rltrader import settings
 from rltrader import manageDB
 
-
 COLUMNS_CHART_DATA = ['date', 'open', 'high', 'low', 'close', 'volume']
 
 COLUMNS_TRAINING_DATA_V1 = [
@@ -50,9 +49,9 @@ table_select_query = """
     SELECT * FROM :TABLE_NAME
     """
 
-def load_data(code, date_from, date_to, ver='v2'):
+def load_data(code, date_from, date_to, ver='v1'):
     sql = manageDB.sqlReader()
-    df = sql.read_query('069500')
+    df = sql.read_query(code)
 
     if ver == 'v1':
         df.columns = ['date', 'open', 'high', 'low', 'close', 'volume']

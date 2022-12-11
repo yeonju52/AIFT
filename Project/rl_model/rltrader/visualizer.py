@@ -27,9 +27,9 @@ class Visualizer:
     def prepare(self, chart_data, title):
         self.title = title
         with lock:
-            # 캔버스를 초기화하고 5개의 차트를 그릴 준비
+            # 캔버스를 초기화하고 5개의 차트를 그릴 준비 -> 3개로 바꿈
             self.fig, self.axes = plt.subplots(
-                nrows=5, ncols=1, facecolor='w', sharex=True)
+                nrows=3, ncols=1, facecolor='w', sharex=True)
             for ax in self.axes:
                 # 보기 어려운 과학적 표기 비활성화
                 ax.get_xaxis().get_major_formatter() \
@@ -112,15 +112,16 @@ class Visualizer:
                         color=color, linestyle='-')
             '''
             # 차트 5. 포트폴리오 가치
-            self.axes[4].axhline(
+            # axes[4] -> axes[2]로 변경
+            self.axes[2].axhline(
                 initial_balance, linestyle='-', color='gray')
-            self.axes[4].fill_between(self.x, pvs, pvs_base,
+            self.axes[2].fill_between(self.x, pvs, pvs_base,
                 where=pvs > pvs_base, facecolor='r', alpha=0.1)
-            self.axes[4].fill_between(self.x, pvs, pvs_base,
+            self.axes[2].fill_between(self.x, pvs, pvs_base,
                 where=pvs < pvs_base, facecolor='b', alpha=0.1)
-            self.axes[4].plot(self.x, pvs, '-k')
-            self.axes[4].xaxis.set_ticks(self.xticks)
-            self.axes[4].xaxis.set_ticklabels(self.xlabels)
+            self.axes[2].plot(self.x, pvs, '-k')
+            self.axes[2].xaxis.set_ticks(self.xticks)
+            self.axes[2].xaxis.set_ticklabels(self.xlabels)
             
             # 에포크 및 탐험 비율
             self.fig.suptitle(f'{self.title}\nEPOCH:{epoch_str}/{num_epoches} EPSILON:{epsilon:.2f}')
@@ -137,9 +138,9 @@ class Visualizer:
                 ax.autoscale()  # 스케일 재설정
             # y축 레이블 재설정
             self.axes[1].set_ylabel('Agent')
-            self.axes[2].set_ylabel('V')
-            self.axes[3].set_ylabel('P')
-            self.axes[4].set_ylabel('PV')
+            # self.axes[2].set_ylabel('V')
+            # self.axes[3].set_ylabel('P')
+            self.axes[2].set_ylabel('PV') # 4->2로 수정
             for ax in _axes:
                 ax.set_xlim(xlim)  # x축 limit 재설정
                 ax.get_xaxis().get_major_formatter() \
