@@ -85,9 +85,10 @@ class Agent:
             if (pred == maxpred).all():
                 epsilon = 1
 
-            # if pred_policy is not None:
-            #     if np.max(pred_policy) - np.min(pred_policy) < 0.05:
-            #         epsilon = 1
+            # HACK: 깃허브의 주석 없앰
+            if pred_policy is not None:
+                if np.max(pred_policy) - np.min(pred_policy) < 0.05:
+                    epsilon = 1
 
         # 탐험 결정
         if np.random.rand() < epsilon:
