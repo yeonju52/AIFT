@@ -7,12 +7,12 @@ import time
 import json
 import numpy as np
 from tqdm import tqdm
-from quantylab.rltrader.environment import Environment
-from quantylab.rltrader.agent import Agent
-from quantylab.rltrader.networks import Network, DNN, LSTMNetwork, CNN
-from quantylab.rltrader.visualizer import Visualizer
-from quantylab.rltrader import utils
-from quantylab.rltrader import settings
+from rltrader.environment import Environment
+from rltrader.agent import Agent
+from rltrader.networks import Network, DNN, LSTMNetwork, CNN
+from rltrader.visualizer import Visualizer
+from rltrader import utils
+from rltrader import settings
 
 
 logger = logging.getLogger(settings.LOGGER_NAME)

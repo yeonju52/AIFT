@@ -1,5 +1,5 @@
 import numpy as np
-from quantylab.rltrader import utils
+from rltrader import utils
 
 
 class Agent:
@@ -7,12 +7,12 @@ class Agent:
     # 주식 보유 비율, 현재 손익, 평균 매수 단가 대비 등락률
     STATE_DIM = 3
 
-    # 매매 수수료 및 세금
-    TRADING_CHARGE = 0.00015  # 거래 수수료 0.015%
-    # TRADING_CHARGE = 0.00011  # 거래 수수료 0.011%
+    # 매매 수수료 및 세금 -> 수정
+    TRADING_CHARGE = 0.0035  # 거래 수수료 0.35% -> 키움 모의 투자 시
+    # TRADING_CHARGE = 0.00015  # 거래 수수료 0.015%
     # TRADING_CHARGE = 0  # 거래 수수료 미적용
-    TRADING_TAX = 0.0025  # 거래세 0.25%
-    # TRADING_TAX = 0  # 거래세 미적용
+    TRADING_TAX = 0  # 거래세 미적용 -> etf
+    # TRADING_TAX = 0.0025  # 거래세 0.25%
 
     # 행동
     ACTION_BUY = 0  # 매수
@@ -85,6 +85,7 @@ class Agent:
             if (pred == maxpred).all():
                 epsilon = 1
 
+            # # HACK: 깃허브의 주석 없앰
             # if pred_policy is not None:
             #     if np.max(pred_policy) - np.min(pred_policy) < 0.05:
             #         epsilon = 1

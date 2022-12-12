@@ -3,9 +3,8 @@ import pandas as pd
 import numpy as np
 import sqlite3
 
-from quantylab.rltrader import settings
-from quantylab.rltrader import manageDB
-
+from rltrader import settings
+from rltrader import manageDB
 
 COLUMNS_CHART_DATA = ['date', 'open', 'high', 'low', 'close', 'volume']
 
@@ -17,22 +16,6 @@ COLUMNS_TRAINING_DATA_V1 = [
     'close_ma20_ratio', 'volume_ma20_ratio',
     'close_ma60_ratio', 'volume_ma60_ratio',
     'close_ma120_ratio', 'volume_ma120_ratio',
-]
-
-COLUMNS_TRAINING_DATA_V1_1 = COLUMNS_TRAINING_DATA_V1 + [
-    'inst_lastinst_ratio', 'frgn_lastfrgn_ratio',
-    'inst_ma5_ratio', 'frgn_ma5_ratio',
-    'inst_ma10_ratio', 'frgn_ma10_ratio',
-    'inst_ma20_ratio', 'frgn_ma20_ratio',
-    'inst_ma60_ratio', 'frgn_ma60_ratio',
-    'inst_ma120_ratio', 'frgn_ma120_ratio',
-]
-
-COLUMNS_TRAINING_DATA_V2 = ['per', 'pbr', 'roe'] + COLUMNS_TRAINING_DATA_V1 + [
-    'market_kospi_ma5_ratio', 'market_kospi_ma20_ratio', 
-    'market_kospi_ma60_ratio', 'market_kospi_ma120_ratio', 
-    'bond_k3y_ma5_ratio', 'bond_k3y_ma20_ratio', 
-    'bond_k3y_ma60_ratio', 'bond_k3y_ma120_ratio',
 ]
 
 def preprocess(data, ver='v1'):
@@ -60,36 +43,15 @@ def preprocess(data, ver='v1'):
             .replace(to_replace=0, method='bfill').values
     )
 
-    if ver == 'v1.1':
-        for window in windows:
-            data[f'inst_ma{window}'] = data['close'].rolling(window).mean()
-            data[f'frgn_ma{window}'] = data['volume'].rolling(window).mean()
-            data[f'inst_ma{window}_ratio'] = \
-                (data['close'] - data[f'inst_ma{window}']) / data[f'inst_ma{window}']
-            data[f'frgn_ma{window}_ratio'] = \
-                (data['volume'] - data[f'frgn_ma{window}']) / data[f'frgn_ma{window}']
-        data['inst_lastinst_ratio'] = np.zeros(len(data))
-        data.loc[1:, 'inst_lastinst_ratio'] = (
-            (data['inst'][1:].values - data['inst'][:-1].values)
-            / data['inst'][:-1].replace(to_replace=0, method='ffill')\
-                .replace(to_replace=0, method='bfill').values
-        )
-        data['frgn_lastfrgn_ratio'] = np.zeros(len(data))
-        data.loc[1:, 'frgn_lastfrgn_ratio'] = (
-            (data['frgn'][1:].values - data['frgn'][:-1].values)
-            / data['frgn'][:-1].replace(to_replace=0, method='ffill')\
-                .replace(to_replace=0, method='bfill').values
-        )
-
     return data
 
 table_select_query = """
     SELECT * FROM :TABLE_NAME
     """
 
-def load_data(code, date_from, date_to, ver='v2'):
+def load_data(code, date_from, date_to, ver='v1'):
     sql = manageDB.sqlReader()
-    df = sql.read_query('069500')
+    df = sql.read_query(code)
 
     if ver == 'v1':
         df.columns = ['date', 'open', 'high', 'low', 'close', 'volume']
@@ -113,12 +75,6 @@ def load_data(code, date_from, date_to, ver='v2'):
     training_data = None
     if ver == 'v1':
         training_data = df[COLUMNS_TRAINING_DATA_V1]
-    elif ver == 'v1.1':
-        training_data = df[COLUMNS_TRAINING_DATA_V1_1]
-    elif ver == 'v2':
-        df.loc[:, ['per', 'pbr', 'roe']] = df[['per', 'pbr', 'roe']].apply(lambda x: x / 100)
-        training_data = df[COLUMNS_TRAINING_DATA_V2]
-        training_data = training_data.apply(np.tanh)
     else:
         raise Exception('Invalid version.')
     
