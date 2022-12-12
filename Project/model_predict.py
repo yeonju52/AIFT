@@ -123,8 +123,4 @@ def model_predict(stock_code, name="0"):
         print(pd.DataFrame(arr, columns=['date', 'action', 'confidence']))
         
 if __name__ == '__main__':
-    code = '069500'
-    kiwoom = Kiwoom()   # 이름 혹시모르니 변경생각해보자
-    real_data = kiwoom.return_data(code)    # 실시간 데이터 받음
-    model_predict("069500", "20221212022551")
-    print(real_data)
+    model_predict("20221212033155")

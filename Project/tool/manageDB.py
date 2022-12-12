@@ -132,16 +132,3 @@ if __name__ == "__main__":
     print(sqlWriter(['114800', '069500', '226490']).get_last_update())
     # sqlWriter(['114800', '069500', '226490']).update_comany_info(['069500', 'kodex_200',  datetime.now().strftime('%Y%m%d%H%M%S')])
 
-
-
-'''
-안 쓴 sql명령문
-    drop_table_query = """
-    DROP TABLE IF EXISTS {TABLE_NAME}
-    """
-
-    sql Updater (성공)
-    exercise) Delete
-    self.curs.execute("DELETE FROM company_info st_code = "226490")
-    self.con.commit()
-'''

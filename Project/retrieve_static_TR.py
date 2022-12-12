@@ -1,6 +1,5 @@
 import sys
-from static_TR.static_kiwoom import *
-from tool import retrieveTR
+from static_TR import static_kiwoom
 from tool import manageDB
 import pandas as pd
 from datetime import datetime, timedelta
@@ -37,9 +36,7 @@ if __name__ == "__main__":
     kiwoom = Kiwoom()
     kiwoom.comm_connect()
     
-    # lowerBound : kiwoom.lowerBound   
-    # upperBound : kiwoom.upperBound
-
+    # lowerBound : kiwoom.lowerBound   upperBound : kiwoom.upperBound
     kiwoom.upperBound = (datetime.today() - timedelta(days=1)).strftime('%Y%m%d') + '153500' # 분봉, 일봉마다 다름
     for i in range(len(st_code)):   # 없으면 IndexError: list index out of range
         kiwoom.lowerBound = last_update[i]
