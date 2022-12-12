@@ -1,12 +1,3 @@
-@echo off
-setlocal enabledelayedexpansion
-
-call C:\Users\USER\Anaconda3\Scripts\activate.bat
-
-@REM kodex_200: 069500
-@REM kodex_inverse: 114800
-@REM kodex_kospi: 226490
-
 for %%c in (069500 114800 226490) do (
     for %%n in (dnn lstm cnn) do (
         :: 8 month
@@ -23,4 +14,3 @@ for %%c in (069500 114800 226490) do (
         :: @REM update
         :: python main.py --mode update --ver v1 --name %%c --stock_code %%c --rl_method pg --net %%n --start_date 20220806090000 --end_date 20221106000000
     )
-)

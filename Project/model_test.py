@@ -9,30 +9,31 @@ from rltrader import utils
 from rltrader import data_manager
 
 
-if __name__ == '__main__':
+def model_train(name):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mode', choices=['train', 'test', 'update', 'predict'], default='train')
+    parser.add_argument('--mode', choices=['train', 'test', 'update', 'predict'], default='test')
     parser.add_argument('--ver', default='v1')
-    parser.add_argument('--name', choices=['069500', '114800', '226490'], default='069500') # 069500 변경
-    parser.add_argument('--stock_code', choices=['069500', '114800', '226490'], nargs='+', default='069500')
+    parser.add_argument('--name', default=name)
+    parser.add_argument('--stock_code', nargs='+', default=['069500', '114800', '226490'])
     parser.add_argument('--rl_method', choices=['dqn', 'pg'], default='pg')
     parser.add_argument('--net', choices=['dnn', 'lstm', 'cnn'], default='lstm')
     parser.add_argument('--backend', default='pytorch')
-    parser.add_argument('--start_date', default='20220101090000')   # FIXME: 20211206090000 적용할 때 안됨.. 왜?
-    parser.add_argument('--end_date', default='20220906000000') # 20221801000000
-    parser.add_argument('--lr', type=float, default=0.0001)
-    parser.add_argument('--discount_factor', type=float, default=0.7)
+    parser.add_argument('--start_date', default='20220906090000')   # FIXME: mode에 따라 값이 달라짐
+    parser.add_argument('--end_date', default='20221206000000') # 20221801000000
+    parser.add_argument('--lr', type=float, default=0.001) # 0.0001에서 수정
+    parser.add_argument('--discount_factor', type=float, default=0) # discount factor = 0.9로 변경
     parser.add_argument('--balance', type=int, default=100000000)
     args = parser.parse_args()
 
+        
     # 학습기 파라미터 설정
     output_name = f'{args.mode}_{args.name}_{args.rl_method}_{args.net}'
     learning = args.mode in ['train', 'update']
     reuse_models = args.mode in ['test', 'update', 'predict']
     value_network_name = f'{args.name}_{args.rl_method}_{args.net}_value.mdl'
     policy_network_name = f'{args.name}_{args.rl_method}_{args.net}_policy.mdl'
-    start_epsilon = 1 if args.mode in ['train', 'update'] else 0
-    num_epoches = 1000 if args.mode in ['train', 'update'] else 1
+    start_epsilon = .5 if args.mode in ['train', 'update'] else 0   # 1에서 변경함
+    num_epoches = 10 if args.mode in ['train', 'update'] else 1    # epoch 1000으로 변경해야함
     num_steps = 5 if args.net in ['lstm', 'cnn'] else 1
 
     # Backend 설정
@@ -80,7 +81,7 @@ if __name__ == '__main__':
     list_min_trading_price = []
     list_max_trading_price = []
 
-    for stock_code in ['069500']: # args.stock_code:
+    for stock_code in args.stock_code:
         # 차트 데이터, 학습 데이터 준비
         chart_data, training_data = data_manager.load_data(
             stock_code, args.start_date, args.end_date, ver=args.ver)
@@ -119,3 +120,7 @@ if __name__ == '__main__':
             learner.save_models()
     elif args.mode == 'predict':
         learner.predict()
+
+
+if __name__ == '__main__':
+    model_train('20221212033155')

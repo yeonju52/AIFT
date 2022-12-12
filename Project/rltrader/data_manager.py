@@ -2,7 +2,6 @@ import os
 import pandas as pd
 import numpy as np
 import sqlite3
-
 from rltrader import settings
 from rltrader import manageDB
 
@@ -17,7 +16,6 @@ COLUMNS_TRAINING_DATA_V1 = [
     'close_ma60_ratio', 'volume_ma60_ratio',
     'close_ma120_ratio', 'volume_ma120_ratio',
 ]
-
 def preprocess(data, ver='v1'):
     windows = [5, 10, 20, 60, 120]
     for window in windows:
@@ -42,9 +40,7 @@ def preprocess(data, ver='v1'):
         / data['volume'][:-1].replace(to_replace=0, method='ffill')\
             .replace(to_replace=0, method='bfill').values
     )
-
     return data
-
 table_select_query = """
     SELECT * FROM :TABLE_NAME
     """
@@ -55,10 +51,8 @@ def load_data(code, date_from, date_to, ver='v1'):
 
     if ver == 'v1':
         df.columns = ['date', 'open', 'high', 'low', 'close', 'volume']
-
     # 날짜 오름차순 정렬
     df = df.sort_values(by='date').reset_index(drop=True)
-
     # 데이터 전처리
     df = preprocess(df)
     
@@ -67,7 +61,6 @@ def load_data(code, date_from, date_to, ver='v1'):
     df = df[(df['date'] >= date_from) & (df['date'] <= date_to)]
     df = df.fillna(method='ffill').reset_index(drop=True)
     # print(df)
-
     # 차트 데이터 분리
     chart_data = df[COLUMNS_CHART_DATA]
     # print(chart_data)

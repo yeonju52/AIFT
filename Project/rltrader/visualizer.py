@@ -6,7 +6,6 @@ plt.switch_backend('agg')
 from mplfinance.original_flavor import candlestick_ohlc
 from rltrader.agent import Agent
 
-
 lock = threading.Lock()
 
 
@@ -27,9 +26,9 @@ class Visualizer:
     def prepare(self, chart_data, title):
         self.title = title
         with lock:
-            # 캔버스를 초기화하고 5개의 차트를 그릴 준비 -> 3개로 바꿈
+            # 캔버스를 초기화하고 5개의 차트를 그릴 준비 -> 4개로 바꿈
             self.fig, self.axes = plt.subplots(
-                nrows=3, ncols=1, facecolor='w', sharex=True)
+                nrows=4, ncols=1, facecolor='w', sharex=True)
             for ax in self.axes:
                 # 보기 어려운 과학적 표기 비활성화
                 ax.get_xaxis().get_major_formatter() \
@@ -76,21 +75,21 @@ class Visualizer:
             self.axes[1].plot(self.x, num_stocks, '-k')  # 보유 주식 수 그리기
             '''
             # 차트 3. 가치 신경망
-            if len(outvals_value) > 0:
-                max_actions = np.argmax(outvals_value, axis=1)
-                for action, color in zip(action_list, self.COLORS):
-                    # 배경 그리기
-                    for idx in self.x:
-                        if max_actions[idx] == action:
-                            self.axes[2].axvline(idx, color=color, alpha=0.1)
-                    # 가치 신경망 출력 그리기
-                    self.axes[2].plot(self.x, outvals_value[:, action], 
-                        color=color, linestyle='-')
-            
+            # if len(outvals_value) > 0:
+            #     max_actions = np.argmax(outvals_value, axis=1)
+            #     for action, color in zip(action_list, self.COLORS):
+            #         배경 그리기
+            #         for idx in self.x:
+            #             if max_actions[idx] == action:
+            #                 self.axes[2].axvline(idx, color=color, alpha=0.1)
+            #         가치 신경망 출력 그리기
+            #         self.axes[2].plot(self.x, outvals_value[:, action], 
+            #             color=color, linestyle='-')
+            '''
             # 차트 4. 정책 신경망
             # 탐험을 노란색 배경으로 그리기
             for exp_idx in exps:
-                self.axes[3].axvline(exp_idx, color='y')
+                self.axes[2].axvline(exp_idx, color='y')
             # 행동을 배경으로 그리기
             _outvals = outvals_policy if len(outvals_policy) > 0 else outvals_value
             for idx, outval in zip(self.x, _outvals):
@@ -103,25 +102,24 @@ class Visualizer:
                     color = self.COLORS[1]  # 매도 파란색
                 elif outval.argmax() == Agent.ACTION_HOLD:
                     color = self.COLORS[2]  # 관망 초록색
-                self.axes[3].axvline(idx, color=color, alpha=0.1)
+                self.axes[2].axvline(idx, color=color, alpha=0.1)
             # 정책 신경망의 출력 그리기
             if len(outvals_policy) > 0:
                 for action, color in zip(action_list, self.COLORS):
-                    self.axes[3].plot(
+                    self.axes[2].plot(
                         self.x, outvals_policy[:, action], 
                         color=color, linestyle='-')
-            '''
+            
             # 차트 5. 포트폴리오 가치
-            # axes[4] -> axes[2]로 변경
-            self.axes[2].axhline(
+            self.axes[3].axhline(
                 initial_balance, linestyle='-', color='gray')
-            self.axes[2].fill_between(self.x, pvs, pvs_base,
+            self.axes[3].fill_between(self.x, pvs, pvs_base,
                 where=pvs > pvs_base, facecolor='r', alpha=0.1)
-            self.axes[2].fill_between(self.x, pvs, pvs_base,
+            self.axes[3].fill_between(self.x, pvs, pvs_base,
                 where=pvs < pvs_base, facecolor='b', alpha=0.1)
-            self.axes[2].plot(self.x, pvs, '-k')
-            self.axes[2].xaxis.set_ticks(self.xticks)
-            self.axes[2].xaxis.set_ticklabels(self.xlabels)
+            self.axes[3].plot(self.x, pvs, '-k')
+            self.axes[3].xaxis.set_ticks(self.xticks)
+            self.axes[3].xaxis.set_ticklabels(self.xlabels)
             
             # 에포크 및 탐험 비율
             self.fig.suptitle(f'{self.title}\nEPOCH:{epoch_str}/{num_epoches} EPSILON:{epsilon:.2f}')
@@ -139,8 +137,8 @@ class Visualizer:
             # y축 레이블 재설정
             self.axes[1].set_ylabel('Agent')
             # self.axes[2].set_ylabel('V')
-            # self.axes[3].set_ylabel('P')
-            self.axes[2].set_ylabel('PV') # 4->2로 수정
+            self.axes[2].set_ylabel('P')
+            self.axes[3].set_ylabel('PV')
             for ax in _axes:
                 ax.set_xlim(xlim)  # x축 limit 재설정
                 ax.get_xaxis().get_major_formatter() \

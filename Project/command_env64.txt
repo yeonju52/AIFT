@@ -1,16 +1,14 @@
 conda create --name AIFT2022_64 python=3.8.13
 conda activate AIFT2022_64
+conda install pytorch torchvision torchaudio cpuonly -c pytorch
 conda install pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia
 conda deactivate
 conda list -n AIFT2022_64
 conda activate AIFT2022_64
-pip install pandas matplotlib
+pip install pandas matplotlib tqdm 
+pip install mplfinance
+conda install sqlite
 pip install keras tensorflow
 conda install keras-gpu
-pip uninstall keras
 conda list
-pip install keras
-pip install tqdm
-conda install sqlite
-pip install mplfinance
 doskey /history > C:\Users\SHLEE\Documents\GitHub\Crystal012\Project\rl_model\command_64.txt
