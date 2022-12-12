@@ -79,6 +79,10 @@ class Kiwoom(QAxWidget):
                 "누적거래량": accum_volume
             })
             
+    def return_data(code):
+        data = [value for value, key in realtime_transaction_info.items() if key == code]
+        return data[0:]
+            
 
 app = QApplication(sys.argv)
 kiwoom = Kiwoom()
