@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import sqlite3
 from rltrader import settings
-from rltrader import manageDB
+from tool import manageDB
 
 COLUMNS_CHART_DATA = ['date', 'open', 'high', 'low', 'close', 'volume']
 
