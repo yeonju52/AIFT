@@ -1,0 +1,8 @@
+set CONDA_FORCE_32BIT=1
+conda info
+conda create --name AIFT2022 python=3.8.13
+conda activate AIFT2022
+pip install pandas pyqt5 matplotlib tqdm
+pip install -U ipykernel
+conda install pywin32 sqlite
+doskey /history > C:\Users\SHLEE\Documents\GitHub\Crystal012\Project\command_venv.txt
