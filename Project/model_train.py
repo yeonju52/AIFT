@@ -8,12 +8,14 @@ from rltrader import settings
 from rltrader import utils
 from rltrader import data_manager
 
+# st_code = ['069500', '114800', '226490']
+
 def model_train(name="0"):
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', choices=['train', 'test', 'update', 'predict'], default='train')
     parser.add_argument('--ver', default='v1')
     parser.add_argument('--name', default=utils.get_time_str())
-    parser.add_argument('--stock_code', nargs='+', default=['069500', '114800', '226490'])
+    parser.add_argument('--stock_code', nargs='+', default=['114800'])
     parser.add_argument('--rl_method', choices=['dqn', 'pg'], default='pg')
     parser.add_argument('--net', choices=['dnn', 'lstm', 'cnn'], default='lstm')
     parser.add_argument('--backend', default='pytorch')
@@ -30,7 +32,7 @@ def model_train(name="0"):
     learning = args.mode in ['train', 'update']
     reuse_models = args.mode in ['test', 'update', 'predict']
     start_epsilon = 1 if args.mode in ['train', 'update'] else 0   # 1에서 변경함
-    num_epoches = 10 if args.mode in ['train', 'update'] else 1    # epoch 200으로 변경해야함
+    num_epoches = 200 if args.mode in ['train', 'update'] else 1    # epoch 200으로 변경해야함
     num_steps = 5 if args.net in ['lstm', 'cnn'] else 1
 
     # Backend 설정
@@ -124,4 +126,4 @@ def model_train(name="0"):
             learner.predict()
 
 if __name__ == '__main__':
-    model_train('20221212033155')
+    model_train('0')

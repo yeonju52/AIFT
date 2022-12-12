@@ -1,8 +1,10 @@
 import sys
-from static_TR import static_kiwoom
+from static_TR.static_kiwoom import *
+from static_TR import retrieveTR
 from tool import manageDB
 import pandas as pd
 from datetime import datetime, timedelta
+
 
 # 주식 코드번호 
 # company_info의 PRIMARY KEY 이자, query의 TABLE NAME
