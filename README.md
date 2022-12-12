@@ -15,8 +15,8 @@
 
 ## Folder List
 - [Assignments](https://github.com/yeonju52/AIFT2022/tree/main/Assignments): 회의록 및 진행상황 보고 (.pptx or .pdf)
-- [Research](https://github.com/yeonju52/AIFT2022/tree/main/Research): 개인 자료조사 내용
-- [Project](https://github.com/yeonju52/AIFT2022/tree/main/Project): 프로젝트 모음 (.py or .ipynb)
+- [Research](https://github.com/yeonju52/AIFT2022/tree/main/Research): 개인 조사 및 공부, 연습 코드 업로드
+- [Project](https://github.com/yeonju52/AIFT2022/tree/main/Project): 최종 모델 디벨롭 (.py or .ipynb)
 
 ## Meeting (* 이전에 했던 미팅들 기록 필요)
 - 정기 오프라인 회의: 매주 목요일 6시~ (최대 11시)
