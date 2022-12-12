@@ -1,8 +1,7 @@
 import sys 
 from PyQt5.QtWidgets import *
 from PyQt5.QAxContainer import *
-import datetime
-from const import *
+from dynamic_TR.const import *
 
 realtime_transaction_info = {}
 code_list = "069500"

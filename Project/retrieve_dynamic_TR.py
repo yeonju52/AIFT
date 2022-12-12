@@ -1,10 +1,3 @@
-import sys
-from static_TR.static_kiwoom import *
-from tool import manageDB
-import pandas as pd
-from datetime import datetime, timedelta
-import pandas as pd
-
 from dynamic_TR.realTime_TR import *
 from dynamic_TR.pytrader import *
 
