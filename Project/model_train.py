@@ -8,7 +8,7 @@ from rltrader import settings
 from rltrader import utils
 from rltrader import data_manager
 
-if __name__ == '__main__':
+def model_train(name="0"):
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', choices=['train', 'test', 'update', 'predict'], default='train')
     parser.add_argument('--ver', default='v1')
@@ -122,3 +122,6 @@ if __name__ == '__main__':
                 learner.save_models()
         elif args.mode == 'predict':
             learner.predict()
+
+if __name__ == '__main__':
+    model_train('20221212033155')

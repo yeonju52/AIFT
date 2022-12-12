@@ -9,7 +9,7 @@ from rltrader import utils
 from rltrader import data_manager
 
 
-def model_train(name):
+def model_test(name="0"):
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', choices=['train', 'test', 'update', 'predict'], default='test')
     parser.add_argument('--ver', default='v1')
@@ -123,4 +123,4 @@ def model_train(name):
 
 
 if __name__ == '__main__':
-    model_train('20221212033155')
+    model_test('20221212033155')

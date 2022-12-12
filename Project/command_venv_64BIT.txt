@@ -1,0 +1,6 @@
+conda info
+conda activate AIFT2022
+conda install pytorch torchvision torchaudio cpuonly -c pytorch
+pip install mplfinance
+conda install sqlite
+doskey /history > C:\Users\SHLEE\Documents\GitHub\Crystal012\Project\command_venv.txt

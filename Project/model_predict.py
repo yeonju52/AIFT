@@ -12,7 +12,7 @@ from rltrader import data_manager
 from dynamic_TR.realTime_TR import *
 from dynamic_TR.pytrader import *
 
-def model_predict(name, stock_code):
+def model_predict(stock_code, name="0"):
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', choices=['train', 'test', 'update', 'predict'], default='predict')
     parser.add_argument('--ver', default='v1')
@@ -123,9 +123,8 @@ def model_predict(name, stock_code):
         print(pd.DataFrame(arr, columns=['date', 'action', 'confidence']))
         
 if __name__ == '__main__':
-    model_predict("20221212022551")
     code = '069500'
     kiwoom = Kiwoom()   # 이름 혹시모르니 변경생각해보자
-    real_data = kiwoom.return_data(code)
-    model_predict("20221212022551", "069500")
+    real_data = kiwoom.return_data(code)    # 실시간 데이터 받음
+    model_predict("069500", "20221212022551")
     print(real_data)
