@@ -4,52 +4,27 @@ from PyQt5.QAxContainer import *
 import datetime
 from const import *
 
+realtime_transaction_info = {}
+code_list = "069500"
 
-
-class MyWindow(QMainWindow):
+class Kiwoom(QAxWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Real")
-        self.setGeometry(300, 300, 300, 400)
-
-        self.universe_realtime_transaction_info = {}
-
-        btn = QPushButton("Register", self)
-        btn.move(20, 20)
-        btn.clicked.connect(self.btn_clicked)
-
-        btn2 = QPushButton("DisConnect", self)
-        btn2.move(20, 100)
-        btn2.clicked.connect(self.btn2_clicked)
 
         self.ocx = QAxWidget("KHOPENAPI.KHOpenAPICtrl.1")
         self.ocx.OnEventConnect.connect(self._handler_login)
         self.ocx.OnReceiveRealData.connect(self._on_receive_real_data)
         self.CommmConnect()
 
-    def btn_clicked(self):
-        #self.SetRealReg("1000", "005930", "20", 0)
-        self.SetRealReg("2000", "", "215;20;214", 0)
-        print("called\n")
-
-    def btn2_clicked(self):
-        self.DisConnectRealData("1000")
-
     def CommmConnect(self):
         self.ocx.dynamicCall("CommConnect()")
-        self.statusBar().showMessage("login 중 ...")
+        print("login 중 ...")
 
     def _handler_login(self, err_code):
         if err_code == 0:
-            self.statusBar().showMessage("login 완료")
-
-
-    def _handler_real_data(self, code, real_type, data):
-        print(code, real_type, data)
-        if real_type == "장시작시간":
-            gubun =  self.GetCommRealData(code, 215)
-            remained_time =  self.GetCommRealData(code, 214)
-            print(gubun, remained_time)            
+            print("login 완료")
+            print("call\n")
+            self.SetRealReg("2000", code_list, "215;20;214", 0)  
 
 
     def SetRealReg(self, screen_no, code_list, fid_list, real_type):
@@ -65,12 +40,12 @@ class MyWindow(QMainWindow):
 
     def _on_receive_real_data(self, code, real_type, data):
         if real_type == "장시작시간":
+            pass
             gubun =  self.GetCommRealData(code, 215)
             remained_time =  self.GetCommRealData(code, 214)
             print(gubun, remained_time)
             if gubun == 4:
-                self.DisConnectRealData("1000")
-
+                self.DisConnectRealData("2000")
 
         elif real_type == "주식체결":
             signed_at = self.ocx.dynamicCall("GetCommRealData(QString, int)", code, 20)
@@ -90,12 +65,12 @@ class MyWindow(QMainWindow):
             accum_volume = self.ocx.dynamicCall("GetCommRealData(QString, int)", code, 13)
             accum_volume = abs(int(accum_volume))
 
-            print(signed_at, close, high, open, low, accum_volume)
+            print(code, signed_at, close, high, open, low, accum_volume)
 
-            if code not in self.universe_realtime_transaction_info:
-                self.universe_realtime_transaction_info.update({code: {}})
+            if code not in realtime_transaction_info:
+                realtime_transaction_info.update({code: {}})
 
-            self.universe_realtime_transaction_info[code].update({
+            realtime_transaction_info[code].update({
                 "체결시간": signed_at,
                 "시가": open,
                 "고가": high,
@@ -103,16 +78,13 @@ class MyWindow(QMainWindow):
                 "현재가": close,
                 "누적거래량": accum_volume
             })
+            
+    def return_data(code):
+        data = [value for value, key in realtime_transaction_info.items() if key == code]
+        return data[0:]
+            
 
-            def get_fid(search_value):
-                keys = [key for key, value in FID_CODES.items() if value == search_value]
-                return keys[0]
+app = QApplication(sys.argv)
+kiwoom = Kiwoom()
 
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MyWindow()
-    window.show()
-    
-    app.exec_()
+app.exec_()
