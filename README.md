@@ -9,9 +9,9 @@
 ### Instructor
   [오장민](https://github.com/jangmino/AIFT2022.git) Prof.
 ### 크리스탈 012 (Teammates 3)
-  - [윤서영](https://github.com/YoonSeoyeong) 20191026 정보시스템공학과
-  - [이연주](https://github.com/yeonju52) 20201050 정보시스템공학과
-  - [허지원](https://github.com/JiwonHeo01) 20201064 정보시스템공학과
+  - [윤서영](https://github.com/YoonSeoyeong) (20191026 정보시스템공학과)
+  - [이연주](https://github.com/yeonju52) (20201050 정보시스템공학과)
+  - [허지원](https://github.com/JiwonHeo01) (20201064 정보시스템공학과)
 
 ## Folder List
 - [Assignments](https://github.com/yeonju52/AIFT2022/tree/main/Assignments): 회의록 및 진행상황 보고 (.pptx or .pdf)
