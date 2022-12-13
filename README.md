@@ -37,4 +37,7 @@
   -   Deadline: ~2022.12.13 오전 11:59
   -   Submission Path: [PDF](https://github.com/FALL2022-AIFT/Crystal012/blob/main/Assignments/%5BAIFT%5D%20221213_FinalProjectReview.pdf) or [PPT](https://github.com/FALL2022-AIFT/Crystal012/blob/main/Assignments/%5BAIFT%5D%20221213_FinalProjectReview.pptx)
 
-## 종강: 2022.12.13
+## 종강
+~2022.12.13
+
+## 이후 보완사항
