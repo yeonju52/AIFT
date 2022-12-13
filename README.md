@@ -22,7 +22,7 @@
 - 정기 오프라인 회의: 매주 목요일 6시~ (최대 11시)
 - 온라인 회의 with Zoom
 - 노션 관리 및 주 작성 : 윤서영
-  - [NOTION URL](https://shiny-rock-5a0.notion.site/AIFT-Artificial-Intelligence-in-Finacial-Trading-2022-814994c39aad491b913976cef3fffd82)
+  - [Notion URL](https://shiny-rock-5a0.notion.site/AIFT-Artificial-Intelligence-in-Finacial-Trading-2022-814994c39aad491b913976cef3fffd82)
 
 ## Assignments
 - (1) ~팀 프로젝트 현황 보고 (실시간 투자 환경 세팅)~
