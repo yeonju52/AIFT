@@ -15,12 +15,12 @@ def model_train(name="0"):
     parser.add_argument('--mode', choices=['train', 'test', 'update', 'predict'], default='train')
     parser.add_argument('--ver', default='v1')
     parser.add_argument('--name', default=utils.get_time_str())
-    parser.add_argument('--stock_code', nargs='+', default=['114800'])
+    parser.add_argument('--stock_code', nargs='+', default=['069500', '114800', '226490'])  # ['069500', '114800', '226490']
     parser.add_argument('--rl_method', choices=['dqn', 'pg'], default='pg')
     parser.add_argument('--net', choices=['dnn', 'lstm', 'cnn'], default='lstm')
     parser.add_argument('--backend', default='pytorch')
     parser.add_argument('--start_date', default='20220101090000')   # FIXME: 20211206090000 적용할 때 안됨.. 왜?
-    parser.add_argument('--end_date', default='20220906000000') # 20221801000000
+    parser.add_argument('--end_date', default='20220906000000')
     parser.add_argument('--lr', type=float, default=0.001) # 0.0001에서 수정
     parser.add_argument('--discount_factor', type=float, default=0.9) # 0.7에서 수정, discount factor = 0.9로 변경
     parser.add_argument('--balance', type=int, default=10000000)   # 100000000에서 변경

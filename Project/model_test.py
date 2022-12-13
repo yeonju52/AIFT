@@ -14,26 +14,24 @@ def model_test(name="0"):
     parser.add_argument('--mode', choices=['train', 'test', 'update', 'predict'], default='test')
     parser.add_argument('--ver', default='v1')
     parser.add_argument('--name', default=name)
-    parser.add_argument('--stock_code', nargs='+', default=['069500', '114800', '226490'])
+    parser.add_argument('--stock_code', nargs='+', default=['069500'])
     parser.add_argument('--rl_method', choices=['dqn', 'pg'], default='pg')
     parser.add_argument('--net', choices=['dnn', 'lstm', 'cnn'], default='lstm')
     parser.add_argument('--backend', default='pytorch')
     parser.add_argument('--start_date', default='20220906090000')   # FIXME: mode에 따라 값이 달라짐
-    parser.add_argument('--end_date', default='20221206000000') # 20221801000000
+    parser.add_argument('--end_date', default='20221206000000')
     parser.add_argument('--lr', type=float, default=0.001) # 0.0001에서 수정
-    parser.add_argument('--discount_factor', type=float, default=0) # discount factor = 0.9로 변경
-    parser.add_argument('--balance', type=int, default=100000000)
+    parser.add_argument('--discount_factor', type=float, default=0.9) # discount factor = 0.9로 변경
+    parser.add_argument('--balance', type=int, default=10000000)
     args = parser.parse_args()
-
-        
+    
     # 학습기 파라미터 설정
     output_name = f'{args.mode}_{args.name}_{args.rl_method}_{args.net}'
+    network_name = f'{args.name}_{args.rl_method}_{args.net}'
     learning = args.mode in ['train', 'update']
     reuse_models = args.mode in ['test', 'update', 'predict']
-    value_network_name = f'{args.name}_{args.rl_method}_{args.net}_value.mdl'
-    policy_network_name = f'{args.name}_{args.rl_method}_{args.net}_policy.mdl'
-    start_epsilon = .5 if args.mode in ['train', 'update'] else 0   # 1에서 변경함
-    num_epoches = 10 if args.mode in ['train', 'update'] else 1    # epoch 1000으로 변경해야함
+    start_epsilon = 1 if args.mode in ['train', 'update'] else 0   # 1에서 변경함
+    num_epoches = 200 if args.mode in ['train', 'update'] else 1    # epoch 200으로 변경해야함
     num_steps = 5 if args.net in ['lstm', 'cnn'] else 1
 
     # Backend 설정
@@ -50,10 +48,10 @@ def model_test(name="0"):
     with open(os.path.join(output_path, 'params.json'), 'w') as f:
         f.write(params)
 
-    # 모델 경로 준비
-    # 모델 포멧은 TensorFlow는 h5, PyTorch는 pickle
-    value_network_path = os.path.join(settings.BASE_DIR, 'models', value_network_name)
-    policy_network_path = os.path.join(settings.BASE_DIR, 'models', policy_network_name)
+    # 모델 경로 생성
+    network_path = os.path.join(settings.BASE_DIR, 'models', network_name)
+    if not os.path.isdir(network_path):
+        os.makedirs(network_path)
 
     # 로그 기록 설정
     log_path = os.path.join(output_path, f'{output_name}.log')
@@ -82,6 +80,11 @@ def model_test(name="0"):
     list_max_trading_price = []
 
     for stock_code in args.stock_code:
+        # 모델 경로 준비
+        # 모델 포멧은 TensorFlow는 h5, PyTorch는 pickle
+        value_network_path = os.path.join(network_path, f'value_{stock_code}.mdl')
+        policy_network_path = os.path.join(network_path, f'policy_{stock_code}.mdl')
+
         # 차트 데이터, 학습 데이터 준비
         chart_data, training_data = data_manager.load_data(
             stock_code, args.start_date, args.end_date, ver=args.ver)
@@ -113,14 +116,14 @@ def model_test(name="0"):
             learner = PolicyGradientLearner(**{**common_params, 
                 'policy_network_path': policy_network_path})
 
-
-    if args.mode in ['train', 'test', 'update']:
-        learner.run(learning=learning)
-        if args.mode in ['train', 'update']:
-            learner.save_models()
-    elif args.mode == 'predict':
-        learner.predict()
+        # 바꿈
+        if args.mode in ['train', 'test', 'update']:
+            learner.run(learning=learning)
+            if args.mode in ['train', 'update']:
+                learner.save_models()
+        elif args.mode == 'predict':
+            learner.predict()
 
 
 if __name__ == '__main__':
-    model_test('20221212033155')
+    model_test('20221213014235')
