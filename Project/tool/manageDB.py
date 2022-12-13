@@ -114,7 +114,7 @@ class sqlWriter:
 class sqlReader:
     def __init__(self):
         """생성자: DB 연결 및 종목코드 딕셔너리 생성"""
-        self.con = sqlite3.connect("kiwoom.db")
+        self.con = sqlite3.connect("kiwoom_tick.db")
         self.curs = self.con.cursor()
     
     """
