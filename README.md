@@ -18,11 +18,11 @@
 - [Research](https://github.com/yeonju52/AIFT2022/tree/main/Research): 개인 조사 및 공부, 연습 코드 업로드
 - [Project](https://github.com/yeonju52/AIFT2022/tree/main/Project): 최종 모델 디벨롭 (.py or .ipynb)
 
-## Meeting (* 이전에 했던 미팅들 기록 필요)
+## Meeting
 - 정기 오프라인 회의: 매주 목요일 6시~ (최대 11시)
 - 온라인 회의 with Zoom
-- 노션 관리 및 주 작성 : 윤서영
-  - [Notion URL](https://shiny-rock-5a0.notion.site/AIFT-Artificial-Intelligence-in-Finacial-Trading-2022-814994c39aad491b913976cef3fffd82)
+- 회의 기록: 노션 [Notion URL](https://shiny-rock-5a0.notion.site/AIFT-Artificial-Intelligence-in-Finacial-Trading-2022-814994c39aad491b913976cef3fffd82)
+  - 관리 및 주 작성 : 윤서영
 
 ## Assignments
 - (1) ~팀 프로젝트 현황 보고 (실시간 투자 환경 세팅)~
