@@ -1,0 +1,13 @@
+추가해야하는거
+	- model 사진 추가
+py -> ipynb
+	- retrieve_dynamic_TR
+	- analyzer
+
+- model 일반화 = train, test['069500', '114800', '226490']
+추가 하고 싶은거
+dynamic_TR - model_predict 연결
+통신 끊기
+12시 10분
+
+1000 <-> 200
