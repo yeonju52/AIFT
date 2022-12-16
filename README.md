@@ -1,4 +1,4 @@
-# AIFT2022
+# Artificial Intelligence in Financial Trade (AIFT)
 ### SSWU - Fall 2022
 
 ## COURSE INFO
