@@ -1,17 +1,20 @@
 # Artificial Intelligence in Financial Trade (AIFT)
 ### SSWU - Fall 2022
 
+## Project
+  - [Here](https://github.com/yeonju52/Automated_Trading_System/tree/main/Project) is my Project.
+  
 ## COURSE INFO
 ### Full Name
   Artificial Intelligence in Financial Trade
 ### Hours
   Wed. 12pm~3pm
 ### Instructor
-  [오장민](https://github.com/jangmino/AIFT2022.git) Prof.
-### 크리스탈 012 (Teammates 3)
-  - [윤서영](https://github.com/YoonSeoyeong) (20191026 정보시스템공학과)
-  - [이연주](https://github.com/yeonju52) (20201050 정보시스템공학과)
-  - [허지원](https://github.com/JiwonHeo01) (20201064 정보시스템공학과)
+  [Oh Jang-Min](https://github.com/jangmino/AIFT2022.git) Prof.
+### Team name: Crystal012 (Teammates 3)
+  - [Lee Yeon-Ju](https://github.com/yeonju52) (20201050, Bachelor of Information System Engineering)
+  - [Yoon Seo-Yeong](https://github.com/YoonSeoyeong) (20191026, Bachelor of Information System Engineering)
+  - [Heo Ji-Won](https://github.com/JiwonHeo01) (20201064, Bachelor of Information System Engineering)
 
 ## Folder List
 - [Assignments](https://github.com/yeonju52/AIFT2022/tree/main/Assignments): 회의록 및 진행상황 보고 (.pptx or .pdf)
